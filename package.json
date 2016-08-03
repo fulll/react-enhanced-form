@@ -1,0 +1,30 @@
+{
+  "name": "react-enhanced-form",
+  "version": "1.0.0",
+  "description": "Enhanced form input for your React application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xeonys/react-enhanced-form.git"
+  },
+  "keywords": [
+    "xeonys",
+    "input",
+    "form",
+    "redux",
+    "react"
+  ],
+  "author": "Didier Franc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xeonys/react-enhanced-form/issues"
+  },
+  "homepage": "https://github.com/xeonys/react-enhanced-form#readme",
+  "dependencies": {
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
+  }
+}
