@@ -131,6 +131,18 @@ class Input extends React.Component {
 
   }
 
+  componentWillReceiveProps = (props) => {
+    this.setState({
+      style: {
+        ...this.state.style,
+        input: {
+          ...this.state.style.input,
+          ...props.style
+        }
+      }
+    })
+  }
+
   render = () => (
     <div
       onMouseOver={this.onMouseOver}

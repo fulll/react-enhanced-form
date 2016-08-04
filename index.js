@@ -150,6 +150,12 @@ var Input = function (_React$Component) {
 
         _this.props.onValueChange(o);
       }
+    }, _this.componentWillReceiveProps = function (props) {
+      _this.setState({
+        style: _extends({}, _this.state.style, {
+          input: _extends({}, _this.state.style.input, props.style)
+        })
+      });
     }, _this.render = function () {
       return _react2.default.createElement(
         'div',
