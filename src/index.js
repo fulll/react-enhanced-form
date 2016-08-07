@@ -1,51 +1,50 @@
 import React from 'react'
 
-const style = {
-  p: {
-    margin: 0
-  },
-  input: {
-    defaultStyle: {
-      display: 'inline',
-      background: 'none',
-      border: 'none',
-      fontSize: '1rem',
-      fontWeight: 100,
-      background: 'none',
-      border: 'none',
-      paddingLeft: 10,
-      paddingBottom: 5
+class Input extends React.Component {
+
+  style = {
+    p: {
+      margin: 0,
+      height: 18,
+      padding: '5px 10px'
     },
-    onFocus: {
-      outline: 'none',
-      fontStyle: 'italic',
-      color: 'grey'
-    }
-  },
-  icon: {
-    defaultStyle: {
-      fontSize: 18,
-      opacity: 0,
-      width: 16,
-      lineHeight: '18px',
-      verticalAlign: 'top',
-      color: '#F26F6F'
+    input: {
+      defaultStyle: {
+        display: 'inline',
+        background: 'none',
+        border: 'none',
+        fontSize: 18,
+        fontWeight: 100,
+        background: 'none',
+        border: 'none',
+        fontFamily: 'Open Sans, sans-serif',
+        ...this.props.style
+      },
+      onFocus: {
+        outline: 'none',
+        color: '#F26F6F'
+      }
     },
-    onMouseOver: {
-      opacity: 1
+    icon: {
+      defaultStyle: {
+        fontSize: 18,
+        opacity: 0,
+        verticalAlign: 'top',
+        color: '#F26F6F',
+        padding: '2px 5px 0 0'
+      },
+      onMouseOver: {
+        opacity: 1
+      }
     }
   }
-}
-
-class Input extends React.Component {
 
   state = {
     style: {
       input: {
-        ...style.input.defaultStyle,
-        ...this.props.style
+        ...this.style.input.defaultStyle
       },
-      icon: style.icon.defaultStyle
+      icon: this.style.icon.defaultStyle
     },
     text: {
       new: this.props.value,
@@ -62,24 +61,26 @@ class Input extends React.Component {
     })
   }
 
-  onMouseOver = e => {
+  onMouseEnter = e => {
+    e.preventDefault()
     this.setState({
       style: {
         ...this.state.style,
         icon: {
-          ...style.icon.defaultStyle,
-          ...style.icon.onMouseOver
+          ...this.style.icon.defaultStyle,
+          ...this.style.icon.onMouseOver
         }
       }
     })
   }
 
   onMouseLeave = e => {
+    e.preventDefault()
     this.setState({
       style: {
         ...this.state.style,
         icon: {
-          ...style.icon.defaultStyle
+          ...this.style.icon.defaultStyle
         }
       }
     })
@@ -98,8 +99,8 @@ class Input extends React.Component {
       style: {
         ...this.state.style,
         input: {
-          ...style.input.defaultStyle,
-          ...style.input.onFocus
+          ...this.style.input.defaultStyle,
+          ...this.style.input.onFocus
         }
       }
     })
@@ -115,7 +116,7 @@ class Input extends React.Component {
       style: {
         ...this.state.style,
         input: {
-          ...style.input.defaultStyle
+          ...this.style.input.defaultStyle
         }
       }
     })
@@ -145,16 +146,15 @@ class Input extends React.Component {
 
   render = () => (
     <div
-      onMouseOver={this.onMouseOver}
+      onMouseEnter={this.onMouseEnter}
       onMouseLeave={this.onMouseLeave}
       onClick={this.onClick}
       onBlur={this.onBlur}
-      style={{...style.p, ...this.props.style}}
+      style={{...this.style.p, ...this.props.style}}
     >
       {this.props.icon
         ? React.cloneElement(this.props.icon, {style: this.state.style.icon})
-        : <span style={this.state.style.icon}>✏️</span>
-      }
+        : <span style={this.state.style.icon}>✏️</span>}
       <input
         style={{
           ...this.state.style.input,

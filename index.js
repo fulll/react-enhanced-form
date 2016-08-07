@@ -6,13 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _defaultStyle;
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -20,46 +20,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var style = {
-  p: {
-    margin: 0
-  },
-  input: {
-    defaultStyle: (_defaultStyle = {
-      display: 'inline',
-      background: 'none',
-      border: 'none',
-      fontSize: '1rem',
-      fontWeight: 100
-    }, _defineProperty(_defaultStyle, 'background', 'none'), _defineProperty(_defaultStyle, 'border', 'none'), _defineProperty(_defaultStyle, 'paddingLeft', 10), _defineProperty(_defaultStyle, 'paddingBottom', 5), _defaultStyle),
-    onFocus: {
-      outline: 'none',
-      fontStyle: 'italic',
-      color: 'grey'
-    }
-  },
-  icon: {
-    defaultStyle: {
-      fontSize: 18,
-      opacity: 0,
-      width: 16,
-      lineHeight: '18px',
-      verticalAlign: 'top',
-      color: '#F26F6F'
-    },
-    onMouseOver: {
-      opacity: 1
-    }
-  }
-};
-
 var Input = function (_React$Component) {
   _inherits(Input, _React$Component);
 
   function Input() {
-    var _Object$getPrototypeO;
+    var _Object$getPrototypeO, _extends2;
 
     var _temp, _this, _ret;
 
@@ -69,10 +34,41 @@ var Input = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Input)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Input)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.style = {
+      p: {
+        margin: 0,
+        height: 18,
+        padding: '5px 10px'
+      },
+      input: {
+        defaultStyle: _extends((_extends2 = {
+          display: 'inline',
+          background: 'none',
+          border: 'none',
+          fontSize: 18,
+          fontWeight: 100
+        }, _defineProperty(_extends2, 'background', 'none'), _defineProperty(_extends2, 'border', 'none'), _defineProperty(_extends2, 'fontFamily', 'Open Sans, sans-serif'), _extends2), _this.props.style),
+        onFocus: {
+          outline: 'none',
+          color: '#F26F6F'
+        }
+      },
+      icon: {
+        defaultStyle: {
+          fontSize: 18,
+          opacity: 0,
+          verticalAlign: 'top',
+          color: '#F26F6F',
+          padding: '2px 5px 0 0'
+        },
+        onMouseOver: {
+          opacity: 1
+        }
+      }
+    }, _this.state = {
       style: {
-        input: _extends({}, style.input.defaultStyle, _this.props.style),
-        icon: style.icon.defaultStyle
+        input: _extends({}, _this.style.input.defaultStyle),
+        icon: _this.style.icon.defaultStyle
       },
       text: {
         new: _this.props.value,
@@ -84,16 +80,18 @@ var Input = function (_React$Component) {
           new: e.target.value
         })
       });
-    }, _this.onMouseOver = function (e) {
+    }, _this.onMouseEnter = function (e) {
+      e.preventDefault();
       _this.setState({
         style: _extends({}, _this.state.style, {
-          icon: _extends({}, style.icon.defaultStyle, style.icon.onMouseOver)
+          icon: _extends({}, _this.style.icon.defaultStyle, _this.style.icon.onMouseOver)
         })
       });
     }, _this.onMouseLeave = function (e) {
+      e.preventDefault();
       _this.setState({
         style: _extends({}, _this.state.style, {
-          icon: _extends({}, style.icon.defaultStyle)
+          icon: _extends({}, _this.style.icon.defaultStyle)
         })
       });
     }, _this.onClick = function (e) {
@@ -104,7 +102,7 @@ var Input = function (_React$Component) {
     }, _this.onFocus = function (e) {
       _this.setState({
         style: _extends({}, _this.state.style, {
-          input: _extends({}, style.input.defaultStyle, style.input.onFocus)
+          input: _extends({}, _this.style.input.defaultStyle, _this.style.input.onFocus)
         })
       });
     }, _this.onKeyPress = function (e) {
@@ -115,7 +113,7 @@ var Input = function (_React$Component) {
 
       _this.setState({
         style: _extends({}, _this.state.style, {
-          input: _extends({}, style.input.defaultStyle)
+          input: _extends({}, _this.style.input.defaultStyle)
         })
       });
 
@@ -160,11 +158,11 @@ var Input = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         {
-          onMouseOver: _this.onMouseOver,
+          onMouseEnter: _this.onMouseEnter,
           onMouseLeave: _this.onMouseLeave,
           onClick: _this.onClick,
           onBlur: _this.onBlur,
-          style: _extends({}, style.p, _this.props.style)
+          style: _extends({}, _this.style.p, _this.props.style)
         },
         _this.props.icon ? _react2.default.cloneElement(_this.props.icon, { style: _this.state.style.icon }) : _react2.default.createElement(
           'span',
