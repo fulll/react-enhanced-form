@@ -15,8 +15,6 @@ class Input extends React.Component {
         border: 'none',
         fontSize: 18,
         fontWeight: 100,
-        background: 'none',
-        border: 'none',
         fontFamily: 'Open Sans, sans-serif',
         ...this.props.style
       },
