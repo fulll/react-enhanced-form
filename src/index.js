@@ -171,6 +171,7 @@ class Input extends React.Component {
         onChange={this.onChange}
         onFocus={this.onFocus}
         onKeyPress={this.onKeyPress}
+        placeholder={this.props.placeholder}
         disabled
         name={this.props.name}
       />

@@ -186,6 +186,7 @@ var Input = function (_React$Component) {
           onChange: _this.onChange,
           onFocus: _this.onFocus,
           onKeyPress: _this.onKeyPress,
+          placeholder: _this.props.placeholder,
           disabled: true,
           name: _this.props.name
         })
