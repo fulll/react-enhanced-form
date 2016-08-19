@@ -24,7 +24,7 @@ var Input = function (_React$Component) {
   _inherits(Input, _React$Component);
 
   function Input() {
-    var _Object$getPrototypeO, _extends2;
+    var _Object$getPrototypeO;
 
     var _temp, _this, _ret;
 
@@ -41,13 +41,14 @@ var Input = function (_React$Component) {
         padding: '5px 10px'
       },
       input: {
-        defaultStyle: _extends((_extends2 = {
+        defaultStyle: _extends({
           display: 'inline',
           background: 'none',
           border: 'none',
           fontSize: 18,
-          fontWeight: 100
-        }, _defineProperty(_extends2, 'background', 'none'), _defineProperty(_extends2, 'border', 'none'), _defineProperty(_extends2, 'fontFamily', 'Open Sans, sans-serif'), _extends2), _this.props.style),
+          fontWeight: 100,
+          fontFamily: 'Open Sans, sans-serif'
+        }, _this.props.style),
         onFocus: {
           outline: 'none',
           color: '#F26F6F'
@@ -129,7 +130,15 @@ var Input = function (_React$Component) {
         try {
           for (var _iterator = l[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             i = _step.value;
-            o = _extends({}, o, _defineProperty({}, i.name, i.value));
+
+            if (i.name[0]) {
+              switch (i.type) {
+                case 'checkbox':
+                  o = _extends({}, o, _defineProperty({}, i.name, i.checked));break;
+                default:
+                  o = _extends({}, o, _defineProperty({}, i.name, i.value));
+              }
+            }
           }
         } catch (err) {
           _didIteratorError = true;

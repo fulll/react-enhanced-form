@@ -122,7 +122,16 @@ class Input extends React.Component {
     if (this.state.text.new != this.state.text.old) {
 
       let o, i, l = e.target.closest('form').querySelectorAll('input:not([type=submit])')
-      for (i of l) { o = { ...o, [i.name]: i.value } }
+      for (i of l) {
+        if (i.name[0]) {
+          switch(i.type) {
+            case 'checkbox':
+              o = { ...o, [i.name]: i.checked }; break;
+           default:
+              o = { ...o, [i.name]: i.value }
+          }
+        }
+      }
 
       this.props.onValueChange(o)
 
