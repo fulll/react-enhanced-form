@@ -10,20 +10,39 @@ npm install -S react-enhanced-form
 import React from 'react'
 import Input from 'react-enhanced-form'
 
-const Form = (someProps) => {
+class Main extends React.Component {
 
-  const props = {
-    onValueChange: e => e.preventDefault(),
-    //icon: <Icon name='edit'/>,
-    //style: {color: 'red'}
+  style = {
+    default: {color: 'black', outline: 'none', border: 'none', width: 300},
+    onFocus: {borderBottom: '1px solid green'},
+    onError: {borderBottom: '1px solid red'}
   }
 
-  return(
-    <form>
-      <Input {...props} value={firstName} name='firstName'/>
-      <Input {...props} value={lastName} name='lastName'/>
-    </form>
-  )
+  check = newValue => newValue < 10
 
+  handleSubmit = e => {
+    e.preventDefault()
+    console.log(this.refs.inputName.state.error ? true : false)
+  }
+
+  handleChange = e => {
+    this.setState({save: true})
+  }
+
+  render = () => (
+    <form onSubmit={this.handleSubmit}>
+      <Input
+        type='number'
+        ref='inputName'
+        value='1'
+        onChange={this.handleChange}
+        style={this.style}
+        check={this.check}
+        required
+      />
+      <br />
+      {this.state.save ? <input type='submit' /> : null}
+    </form>
+ )
 }
 ```
