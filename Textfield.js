@@ -188,7 +188,8 @@ var Input = function (_React$Component) {
           onKeyPress: _this.onKeyPress,
           placeholder: _this.props.placeholder,
           disabled: true,
-          name: _this.props.name
+          name: _this.props.name,
+          spellCheck: _this.props.spellcheck || false
         })
       );
     }, _temp), _possibleConstructorReturn(_this, _ret);

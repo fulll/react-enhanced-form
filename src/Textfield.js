@@ -174,6 +174,7 @@ class Input extends React.Component {
         placeholder={this.props.placeholder}
         disabled
         name={this.props.name}
+        spellCheck={this.props.spellcheck || false}
       />
     </div>
   )
