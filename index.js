@@ -61,7 +61,7 @@ var Input = function (_React$Component) {
 
       _this.props.check(value) ? _this.setState({ style: _extends({}, _this.style.default, _this.style.onFocus), error: false }) : _this.setState({ style: _extends({}, _this.style.default, _this.style.onError), error: true });
     }, _this.onFocus = function () {
-      _this.setState({ style: _extends({}, _this.style.default, _this.style.onFocus) });
+      _this.setState({ style: _extends({}, _this.style.default, _this.style.onFocus, _this.state.error ? _this.style.onError : null) });
     }, _this.byType = function (props) {
       switch (_this.props.type) {
         case 'textarea':

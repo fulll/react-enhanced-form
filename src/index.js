@@ -42,7 +42,11 @@ export default class Input extends React.Component {
   }
 
   onFocus = () => {
-    this.setState({style: {...this.style.default, ...this.style.onFocus}})
+    this.setState({style: {
+      ...this.style.default,
+      ...this.style.onFocus,
+      ...this.state.error ? this.style.onError : null
+    }})
   }
 
   byType = props => {
