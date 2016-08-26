@@ -5,7 +5,13 @@ export default class Input extends React.Component {
   style = {
     default: this.props.style ? this.props.style.default : {},
     onFocus: this.props.style ? this.props.style.onFocus : {},
-    onError: this.props.style ? this.props.style.onError : {}
+    onError: this.props.style ? this.props.style.onError : {},
+    normalizr: {
+      borderBottom: 'none',
+      borderTop: 'none',
+      borderLeft: 'none',
+      borderRight: 'none'
+    }
   }
 
   state = {
@@ -24,7 +30,9 @@ export default class Input extends React.Component {
 
     this.setState({
       disabled: true,
-      style: this.state.error ? {...this.style.default, ...this.style.onError} : this.style.default
+      style: this.state.error
+        ? {...this.style.normalizr, ...this.style.default, ...this.style.onError}
+        : {...this.style.normalizr, ...this.style.default}
     })
 
     if (this.state.value != this.state.initialValue)
@@ -37,12 +45,19 @@ export default class Input extends React.Component {
       this.setState({value})
 
       this.props.check(value)
-        ? this.setState({style: {...this.style.default, ...this.style.onFocus}, error: false })
-        : this.setState({style: {...this.style.default, ...this.style.onError}, error: true })
+        ? this.setState({
+            style: {...this.style.normalizr, ...this.style.default, ...this.style.onFocus},
+            error: false
+          })
+        : this.setState({
+          style: {...this.style.normalizr, ...this.style.default, ...this.style.onError},
+          error: true
+         })
   }
 
   onFocus = () => {
     this.setState({style: {
+      ...this.style.normalizr,
       ...this.style.default,
       ...this.style.onFocus,
       ...this.state.error ? this.style.onError : null

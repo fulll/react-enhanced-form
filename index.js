@@ -35,7 +35,13 @@ var Input = function (_React$Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Input)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.style = {
       default: _this.props.style ? _this.props.style.default : {},
       onFocus: _this.props.style ? _this.props.style.onFocus : {},
-      onError: _this.props.style ? _this.props.style.onError : {}
+      onError: _this.props.style ? _this.props.style.onError : {},
+      normalizr: {
+        borderBottom: 'none',
+        borderTop: 'none',
+        borderLeft: 'none',
+        borderRight: 'none'
+      }
     }, _this.state = {
       disabled: true,
       initialValue: _this.props.value,
@@ -50,7 +56,7 @@ var Input = function (_React$Component) {
 
       _this.setState({
         disabled: true,
-        style: _this.state.error ? _extends({}, _this.style.default, _this.style.onError) : _this.style.default
+        style: _this.state.error ? _extends({}, _this.style.normalizr, _this.style.default, _this.style.onError) : _extends({}, _this.style.normalizr, _this.style.default)
       });
 
       if (_this.state.value != _this.state.initialValue) _this.props.onChange(_this.state.value);
@@ -59,9 +65,15 @@ var Input = function (_React$Component) {
       var value = e.target.value;
       _this.setState({ value: value });
 
-      _this.props.check(value) ? _this.setState({ style: _extends({}, _this.style.default, _this.style.onFocus), error: false }) : _this.setState({ style: _extends({}, _this.style.default, _this.style.onError), error: true });
+      _this.props.check(value) ? _this.setState({
+        style: _extends({}, _this.style.normalizr, _this.style.default, _this.style.onFocus),
+        error: false
+      }) : _this.setState({
+        style: _extends({}, _this.style.normalizr, _this.style.default, _this.style.onError),
+        error: true
+      });
     }, _this.onFocus = function () {
-      _this.setState({ style: _extends({}, _this.style.default, _this.style.onFocus, _this.state.error ? _this.style.onError : null) });
+      _this.setState({ style: _extends({}, _this.style.normalizr, _this.style.default, _this.style.onFocus, _this.state.error ? _this.style.onError : null) });
     }, _this.byType = function (props) {
       switch (_this.props.type) {
         case 'textarea':
