@@ -44,7 +44,7 @@ var Input = function (_React$Component) {
     }, _this.onClick = function (e) {
       e.persist();
       _this.setState({ disabled: false }, function () {
-        return e.target.closest('input').focus();
+        return e.target.closest('input, textarea').focus();
       });
     }, _this.onBlur = function () {
 

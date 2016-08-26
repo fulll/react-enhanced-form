@@ -17,7 +17,7 @@ export default class Input extends React.Component {
 
   onClick = e => {
     e.persist()
-    this.setState({disabled: false}, () => e.target.closest('input').focus())
+    this.setState({disabled: false}, () => e.target.closest('input, textarea').focus())
   }
 
   onBlur = () => {
