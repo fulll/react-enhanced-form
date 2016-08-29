@@ -36,7 +36,7 @@ export default class Input extends React.Component {
     })
 
     if (this.state.value != this.state.initialValue)
-      this.props.onChange(this.state.value)
+      this.props.onChange(this.state.value, this.state.error)
   }
 
   onChange = (e) => {
@@ -44,15 +44,19 @@ export default class Input extends React.Component {
       let value = e.target.value
       this.setState({value})
 
-      this.props.check(value)
+      let error = !this.props.check(value)
+
+      if (value === '' && this.props.required) error = true
+
+      error
         ? this.setState({
-            style: {...this.style.normalizr, ...this.style.default, ...this.style.onFocus},
-            error: false
+            style: {...this.style.normalizr, ...this.style.default, ...this.style.onError},
+            error
           })
         : this.setState({
-          style: {...this.style.normalizr, ...this.style.default, ...this.style.onError},
-          error: true
-         })
+            style: {...this.style.normalizr, ...this.style.default, ...this.style.onFocus},
+            error
+          })
   }
 
   onFocus = () => {

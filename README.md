@@ -25,8 +25,9 @@ class Main extends React.Component {
     console.log(this.refs.inputName.state.error ? true : false)
   }
 
-  handleChange = e => {
-    this.setState({save: true})
+  handleChange = (data, error) => {
+    console.log(data, error)
+    error ? this.setState({save: true}) : this.setState({save: true})
   }
 
   render = () => (

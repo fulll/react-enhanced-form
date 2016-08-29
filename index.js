@@ -22,7 +22,7 @@ var Input = function (_React$Component) {
   _inherits(Input, _React$Component);
 
   function Input() {
-    var _Object$getPrototypeO;
+    var _ref;
 
     var _temp, _this, _ret;
 
@@ -32,7 +32,7 @@ var Input = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Input)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.style = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Input.__proto__ || Object.getPrototypeOf(Input)).call.apply(_ref, [this].concat(args))), _this), _this.style = {
       default: _this.props.style ? _this.props.style.default : {},
       onFocus: _this.props.style ? _this.props.style.onFocus : {},
       onError: _this.props.style ? _this.props.style.onError : {},
@@ -59,18 +59,22 @@ var Input = function (_React$Component) {
         style: _this.state.error ? _extends({}, _this.style.normalizr, _this.style.default, _this.style.onError) : _extends({}, _this.style.normalizr, _this.style.default)
       });
 
-      if (_this.state.value != _this.state.initialValue) _this.props.onChange(_this.state.value);
+      if (_this.state.value != _this.state.initialValue) _this.props.onChange(_this.state.value, _this.state.error);
     }, _this.onChange = function (e) {
 
       var value = e.target.value;
       _this.setState({ value: value });
 
-      _this.props.check(value) ? _this.setState({
-        style: _extends({}, _this.style.normalizr, _this.style.default, _this.style.onFocus),
-        error: false
-      }) : _this.setState({
+      var error = !_this.props.check(value);
+
+      if (value === '' && _this.props.required) error = true;
+
+      error ? _this.setState({
         style: _extends({}, _this.style.normalizr, _this.style.default, _this.style.onError),
-        error: true
+        error: error
+      }) : _this.setState({
+        style: _extends({}, _this.style.normalizr, _this.style.default, _this.style.onFocus),
+        error: error
       });
     }, _this.onFocus = function () {
       _this.setState({ style: _extends({}, _this.style.normalizr, _this.style.default, _this.style.onFocus, _this.state.error ? _this.style.onError : null) });
