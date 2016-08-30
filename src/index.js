@@ -47,6 +47,7 @@ export default class Input extends React.Component {
       let error = !this.props.check(value)
 
       if (value === '' && this.props.required) error = true
+      if (value === '' && !this.props.required) error = false
 
       error
         ? this.setState({
