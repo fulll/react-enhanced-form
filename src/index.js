@@ -15,7 +15,6 @@ export default class Input extends React.Component {
   }
 
   state = {
-    initialValue: this.props.value,
     value: this.props.value,
     style: this.style.default
   }
@@ -28,28 +27,30 @@ export default class Input extends React.Component {
         : {...this.style.normalizr, ...this.style.default}
     })
 
-    if (this.state.value != this.state.initialValue)
-      this.props.onChange(this.state.value, this.state.error)
   }
 
-  onChange = (e) => {
+  componentDidMount = () => this.propagate(true)
 
-      let value = e.target.value
-      this.setState({value})
+  onChange = (e) => this.setState({value:  e.target.value}, this.propagate)
 
-      let error = !this.props.check(value)
+  propagate = (init) => {
+    let value = this.state.value
 
-      if (value === '' && this.props.required) error = true
+    let error = !this.props.check(value)
+    if (value === '' && this.props.required) error = true
 
-      error
-        ? this.setState({
-            style: {...this.style.normalizr, ...this.style.default, ...this.style.onError},
-            error
-          })
-        : this.setState({
-            style: {...this.style.normalizr, ...this.style.default, ...this.style.onFocus},
-            error
-          })
+    const next = () => this.props.onChange(this.state.value, this.state.error)
+
+    error
+      ? this.setState({
+          style: {...this.style.normalizr, ...this.style.default, ...this.style.onError},
+          error
+        }, next)
+      : !init ? this.setState({
+          style: {...this.style.normalizr, ...this.style.default, ...this.style.onFocus},
+          error
+        }, next) : null
+
   }
 
   onFocus = () => {
