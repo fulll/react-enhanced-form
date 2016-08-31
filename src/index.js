@@ -15,21 +15,14 @@ export default class Input extends React.Component {
   }
 
   state = {
-    disabled: true,
     initialValue: this.props.value,
     value: this.props.value,
     style: this.style.default
   }
 
-  onClick = e => {
-    e.persist()
-    this.setState({disabled: false}, () => e.target.closest('input, textarea').focus())
-  }
-
   onBlur = () => {
 
     this.setState({
-      disabled: true,
       style: this.state.error
         ? {...this.style.normalizr, ...this.style.default, ...this.style.onError}
         : {...this.style.normalizr, ...this.style.default}
@@ -47,7 +40,6 @@ export default class Input extends React.Component {
       let error = !this.props.check(value)
 
       if (value === '' && this.props.required) error = true
-      if (value === '' && !this.props.required) error = false
 
       error
         ? this.setState({
@@ -83,7 +75,7 @@ export default class Input extends React.Component {
 
     const props = {
       type: this.props.type,
-      disabled: this.state.disabled,
+      disabled: this.props.disabled,
       onBlur: this.onBlur,
       defaultValue: this.props.value,
       onChange: this.onChange,

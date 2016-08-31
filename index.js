@@ -43,19 +43,12 @@ var Input = function (_React$Component) {
         borderRight: 'none'
       }
     }, _this.state = {
-      disabled: true,
       initialValue: _this.props.value,
       value: _this.props.value,
       style: _this.style.default
-    }, _this.onClick = function (e) {
-      e.persist();
-      _this.setState({ disabled: false }, function () {
-        return e.target.closest('input, textarea').focus();
-      });
     }, _this.onBlur = function () {
 
       _this.setState({
-        disabled: true,
         style: _this.state.error ? _extends({}, _this.style.normalizr, _this.style.default, _this.style.onError) : _extends({}, _this.style.normalizr, _this.style.default)
       });
 
@@ -68,7 +61,6 @@ var Input = function (_React$Component) {
       var error = !_this.props.check(value);
 
       if (value === '' && _this.props.required) error = true;
-      if (value === '' && !_this.props.required) error = false;
 
       error ? _this.setState({
         style: _extends({}, _this.style.normalizr, _this.style.default, _this.style.onError),
@@ -91,7 +83,7 @@ var Input = function (_React$Component) {
 
       var props = {
         type: _this.props.type,
-        disabled: _this.state.disabled,
+        disabled: _this.props.disabled,
         onBlur: _this.onBlur,
         defaultValue: _this.props.value,
         onChange: _this.onChange,
