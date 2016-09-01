@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _debounce = require('lodash/debounce');
+
+var _debounce2 = _interopRequireDefault(_debounce);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -46,31 +50,28 @@ var Input = function (_React$Component) {
       value: _this.props.value,
       style: _this.style.default
     }, _this.onBlur = function () {
-
       _this.setState({
         style: _this.state.error ? _extends({}, _this.style.normalizr, _this.style.default, _this.style.onError) : _extends({}, _this.style.normalizr, _this.style.default)
       });
     }, _this.componentDidMount = function () {
-      return _this.propagate(true);
+      var next = function next() {
+        return _this.props.onChange(_this.state.value, _this.state.error);
+      };
+      _this.next = (0, _debounce2.default)(next, 500, { 'leading': false, 'trailing': true });
+      _this.propagate(true);
     }, _this.onChange = function (e) {
       return _this.setState({ value: e.target.value }, _this.propagate);
     }, _this.propagate = function (init) {
+
       var value = _this.state.value;
 
       var error = !_this.props.check(value);
       if (value === '' && _this.props.required) error = true;
 
-      var next = function next() {
-        return _this.props.onChange(_this.state.value, _this.state.error);
-      };
+      var onFocus = _extends({}, _this.style.normalizr, _this.style.default, _this.style.onFocus);
+      var onError = _extends({}, _this.style.normalizr, _this.style.default, _this.style.onError);
 
-      error ? _this.setState({
-        style: _extends({}, _this.style.normalizr, _this.style.default, _this.style.onError),
-        error: error
-      }, next) : !init ? _this.setState({
-        style: _extends({}, _this.style.normalizr, _this.style.default, _this.style.onFocus),
-        error: error
-      }, next) : null;
+      error ? _this.setState({ style: onError, error: error }, _this.next) : init ? _this.setState({ error: error }, _this.next) : _this.setState({ style: onFocus, error: error }, _this.next);
     }, _this.onFocus = function () {
       _this.setState({ style: _extends({}, _this.style.normalizr, _this.style.default, _this.style.onFocus, _this.state.error ? _this.style.onError : null) });
     }, _this.byType = function (props) {

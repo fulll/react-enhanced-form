@@ -1,9 +1,10 @@
 import React from 'react'
+import debounce from 'lodash/debounce'
 
 export default class Input extends React.Component {
 
-  style = {
-    default: this.props.style ? this.props.style.default : {},
+  style = {
+    default: this.props.style ? this.props.style.default : {},
     onFocus: this.props.style ? this.props.style.onFocus : {},
     onError: this.props.style ? this.props.style.onError : {},
     normalizr: {
@@ -20,37 +21,36 @@ export default class Input extends React.Component {
   }
 
   onBlur = () => {
-
     this.setState({
       style: this.state.error
         ? {...this.style.normalizr, ...this.style.default, ...this.style.onError}
         : {...this.style.normalizr, ...this.style.default}
     })
-
   }
 
-  componentDidMount = () => this.propagate(true)
+  componentDidMount = () => {
+    const next = () => this.props.onChange(this.state.value, this.state.error)
+    this.next = debounce(next, 500, {'leading': false, 'trailing': true})
+    this.propagate(true)
+  }
 
   onChange = (e) => this.setState({value:  e.target.value}, this.propagate)
 
   propagate = (init) => {
+
     let value = this.state.value
 
     let error = !this.props.check(value)
     if (value === '' && this.props.required) error = true
 
-    const next = () => this.props.onChange(this.state.value, this.state.error)
+    const onFocus = {...this.style.normalizr, ...this.style.default, ...this.style.onFocus}
+    const onError = {...this.style.normalizr, ...this.style.default, ...this.style.onError}
 
     error
-      ? this.setState({
-          style: {...this.style.normalizr, ...this.style.default, ...this.style.onError},
-          error
-        }, next)
-      : !init ? this.setState({
-          style: {...this.style.normalizr, ...this.style.default, ...this.style.onFocus},
-          error
-        }, next) : null
-
+      ? this.setState({style: onError, error}, this.next)
+      : init
+        ? this.setState({error}, this.next)
+        : this.setState({style: onFocus, error}, this.next)
   }
 
   onFocus = () => {
