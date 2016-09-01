@@ -20,23 +20,14 @@ class Main extends React.Component {
 
   check = newValue => newValue < 10
 
-  handleSubmit = e => {
-    e.preventDefault()
-    console.log(this.refs.inputName.state.error ? true : false)
-  }
-
-  handleChange = (data, error) => {
-    console.log(data, error)
-    error ? this.setState({save: true}) : this.setState({save: true})
-  }
-
   render = () => (
     <form onSubmit={this.handleSubmit}>
       <Input
         type='number'
         ref='inputName'
         value='1'
-        onChange={this.handleChange}
+        onChange={(data, error) => console.log('change', data, error)}
+        onMount={(data,error) => console.log('mount', data, error)}
         style={this.style}
         check={this.check}
         required

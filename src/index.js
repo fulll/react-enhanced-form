@@ -3,8 +3,8 @@ import debounce from 'lodash/debounce'
 
 export default class Input extends React.Component {
 
-  style = {
-    default: this.props.style ? this.props.style.default : {},
+  style = {
+    default: this.props.style ? this.props.style.default : {},
     onFocus: this.props.style ? this.props.style.onFocus : {},
     onError: this.props.style ? this.props.style.onError : {},
     normalizr: {
@@ -20,18 +20,21 @@ export default class Input extends React.Component {
     style: this.style.default
   }
 
+  onFocus = () => {
+    this.setState({style: {
+      ...this.style.normalizr,
+      ...this.style.default,
+      ...this.style.onFocus,
+      ...this.state.error ? this.style.onError : null
+    }})
+  }
+
   onBlur = () => {
     this.setState({
       style: this.state.error
         ? {...this.style.normalizr, ...this.style.default, ...this.style.onError}
         : {...this.style.normalizr, ...this.style.default}
     })
-  }
-
-  componentDidMount = () => {
-    const next = () => this.props.onChange(this.state.value, this.state.error)
-    this.next = debounce(next, 500, {'leading': false, 'trailing': true})
-    this.propagate(true)
   }
 
   onChange = (e) => this.setState({value:  e.target.value}, this.propagate)
@@ -49,17 +52,21 @@ export default class Input extends React.Component {
     error
       ? this.setState({style: onError, error}, this.next)
       : init
-        ? this.setState({error}, this.next)
+        ? this.setState({error}, this.next(true))
         : this.setState({style: onFocus, error}, this.next)
   }
 
-  onFocus = () => {
-    this.setState({style: {
-      ...this.style.normalizr,
-      ...this.style.default,
-      ...this.style.onFocus,
-      ...this.state.error ? this.style.onError : null
-    }})
+  next = (init) => {
+    if (init && this.props.onMount)
+      this.props.onMount(this.state.value, this.state.error)
+
+    if (!init && this.props.onChange)
+      this.props.onChange(this.state.value, this.state.error)
+  }
+
+  componentDidMount = () => {
+    this.next = debounce(this.next, 500)
+    this.propagate(true)
   }
 
   byType = props => {
