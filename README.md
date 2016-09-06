@@ -32,8 +32,6 @@ class Main extends React.Component {
         check={this.check}
         required
       />
-      <br />
-      {this.state.save ? <input type='submit' /> : null}
     </form>
  )
 }

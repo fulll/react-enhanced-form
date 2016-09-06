@@ -45,6 +45,7 @@ export default class Input extends React.Component {
 
     let error = !this.props.check(value)
     if (value === '' && this.props.required) error = true
+    if (value === '' && !this.props.required) error = false
 
     const onFocus = {...this.style.normalizr, ...this.style.default, ...this.style.onFocus}
     const onError = {...this.style.normalizr, ...this.style.default, ...this.style.onError}

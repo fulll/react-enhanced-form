@@ -63,6 +63,7 @@ var Input = function (_React$Component) {
 
       var error = !_this.props.check(value);
       if (value === '' && _this.props.required) error = true;
+      if (value === '' && !_this.props.required) error = false;
 
       var onFocus = _extends({}, _this.style.normalizr, _this.style.default, _this.style.onFocus);
       var onError = _extends({}, _this.style.normalizr, _this.style.default, _this.style.onError);
