@@ -56,7 +56,7 @@ var Input = function (_React$Component) {
         style: _this.state.error ? _extends({}, _this.style.normalizr, _this.style.default, _this.style.onError) : _extends({}, _this.style.normalizr, _this.style.default)
       });
     }, _this.onChange = function (e) {
-      return _this.setState({ value: e.target.value }, _this.propagate);
+      _this.setState({ value: _this.props.format ? _this.props.format(e.target.value) : e.target.value }, _this.propagate);
     }, _this.propagate = function (init) {
 
       var value = _this.state.value;
@@ -87,17 +87,18 @@ var Input = function (_React$Component) {
     }, _this.render = function () {
 
       var props = {
+        onKeyDown: _this.props.onKeyDown,
         type: _this.props.type,
         disabled: _this.props.disabled,
         onBlur: _this.onBlur,
-        defaultValue: _this.props.value,
         onChange: _this.onChange,
         style: _this.state.style,
         onFocus: _this.onFocus,
         required: _this.props.required ? true : false,
         spellCheck: _this.props.spellcheck || _this.props.spellCheck || false,
         min: _this.props.min,
-        step: _this.props.step
+        step: _this.props.step,
+        value: _this.state.value
       };
 
       return _react2.default.createElement(

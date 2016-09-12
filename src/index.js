@@ -37,7 +37,9 @@ export default class Input extends React.Component {
     })
   }
 
-  onChange = (e) => this.setState({value:  e.target.value}, this.propagate)
+  onChange = (e) => {
+    this.setState({value: this.props.format ? this.props.format(e.target.value) : e.target.value }, this.propagate)
+  }
 
   propagate = (init) => {
 
@@ -83,20 +85,20 @@ export default class Input extends React.Component {
   render = () => {
 
     const props = {
+      onKeyDown: this.props.onKeyDown,
       type: this.props.type,
       disabled: this.props.disabled,
       onBlur: this.onBlur,
-      defaultValue: this.props.value,
       onChange: this.onChange,
       style: this.state.style,
       onFocus: this.onFocus,
       required: this.props.required ? true : false,
       spellCheck: this.props.spellcheck || this.props.spellCheck || false,
       min: this.props.min,
-      step: this.props.step
+      step: this.props.step,
+      value: this.state.value
     }
 
     return <div onClick={this.onClick}>{this.byType(props)}</div>
-
   }
 }
