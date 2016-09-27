@@ -24,7 +24,6 @@ class Main extends React.Component {
     <form onSubmit={this.handleSubmit}>
       <Input
         type='number'
-        ref='inputName'
         value='1'
         onChange={(data, error) => console.log('change', data, error)}
         onMount={(data,error) => console.log('mount', data, error)}

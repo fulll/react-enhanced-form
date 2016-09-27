@@ -1,6 +1,6 @@
 {
   "name": "react-enhanced-form",
-  "version": "1.2.17",
+  "version": "1.2.18",
   "description": "Enhanced form input for your React application",
   "main": "index.js",
   "repository": {
@@ -21,8 +21,8 @@
   },
   "homepage": "https://github.com/xeonys/react-enhanced-form#readme",
   "devDependencies": {
-    "react": "^15.3.0",
-    "react-dom": "^15.3.0",
-    "lodash": "^4.15.0"
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "lodash": "^4.16.2"
   }
 }

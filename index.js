@@ -51,6 +51,12 @@ var Input = function (_React$Component) {
       style: _this.style.default
     }, _this.onFocus = function () {
       _this.setState({ style: _extends({}, _this.style.normalizr, _this.style.default, _this.style.onFocus, _this.state.error ? _this.style.onError : null) });
+    }, _this.componentWillReceiveProps = function (_ref2) {
+      var value = _ref2.value;
+
+      _this.setState({
+        value: _this.props.format ? _this.props.format(value) : value
+      }, _this.propagate);
     }, _this.onBlur = function () {
       _this.setState({
         style: _this.state.error ? _extends({}, _this.style.normalizr, _this.style.default, _this.style.onError) : _extends({}, _this.style.normalizr, _this.style.default)

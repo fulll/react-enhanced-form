@@ -29,6 +29,12 @@ export default class Input extends React.Component {
     }})
   }
 
+  componentWillReceiveProps = ({value}) => {
+    this.setState({
+      value: this.props.format ? this.props.format(value) : value
+    }, this.propagate)
+  }
+
   onBlur = () => {
     this.setState({
       style: this.state.error
@@ -38,7 +44,9 @@ export default class Input extends React.Component {
   }
 
   onChange = (e) => {
-    this.setState({value: this.props.format ? this.props.format(e.target.value) : e.target.value }, this.propagate)
+    this.setState({
+      value: this.props.format ? this.props.format(e.target.value) : e.target.value
+    }, this.propagate)
   }
 
   propagate = (init) => {
