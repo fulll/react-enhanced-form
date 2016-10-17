@@ -1,7 +1,18 @@
 import React from 'react'
 import debounce from 'lodash/debounce'
+import styled from 'styled-components'
 
-export default class Input extends React.Component {
+const Input = styled.input`
+  &:required, &:invalid { box-shadow: none }
+  &:disabled { background-color: rgba(0,0,0,0) }
+`
+
+const Textarea = styled.textarea`
+  &:required, &:invalid { box-shadow: none }
+  &:disabled { background-color: rgba(0,0,0,0) }
+`
+
+export default class EnhancedInput extends React.Component {
 
   style = {
     default: this.props.style ? this.props.style.default : {},
@@ -83,10 +94,10 @@ export default class Input extends React.Component {
   byType = props => {
     switch (this.props.type) {
       case 'textarea':
-        return <textarea {...props}/>
+        return <Textarea {...props}/>
       case 'text':
       default:
-        return <input {...props}/>
+        return <Input {...props}/>
     }
   }
 
