@@ -116,6 +116,7 @@ export default class EnhancedInput extends React.Component {
       min: this.props.min,
       step: this.props.step,
       value: this.state.value
+      placeholder: this.props.placeholder,
     }
 
     return <div onClick={this.onClick}>{this.byType(props)}</div>
