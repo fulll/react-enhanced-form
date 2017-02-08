@@ -118,7 +118,8 @@ var EnhancedInput = function (_React$Component) {
         spellCheck: _this.props.spellcheck || _this.props.spellCheck || false,
         min: _this.props.min,
         step: _this.props.step,
-        value: _this.state.value
+        value: _this.state.value,
+        placeholder: _this.props.placeholder,
       };
 
       return _react2.default.createElement(
