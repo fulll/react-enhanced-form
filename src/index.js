@@ -58,8 +58,25 @@ export default class EnhancedInput extends React.Component {
     this.setState({
       value: this.props.format ? this.props.format(e.target.value) : e.target.value
     }, this.propagate)
+    
+    if (this.props.format) {
+      const range = e.target.selectionStart
+      const lengthFormat = this.props.format(e.target.value).length
+      const length = e.target.value.length
+      
+      const newRange = range - (length - lengthFormat)
+      this.range = newRange
+    }
   }
-
+  
+  componentDidUpdate = () => {
+    if (this.range !== undefined) {
+      console.log(this.range, this.input)
+      this.input.setSelectionRange(this.range, this.range)
+      this.range = undefined
+    }
+  }
+ 
   propagate = (init) => {
 
     let value = this.state.value
