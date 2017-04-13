@@ -77,6 +77,21 @@ var EnhancedInput = function (_React$Component) {
       _this.setState({
         value: _this.props.format ? _this.props.format(e.target.value) : e.target.value
       }, _this.propagate);
+
+      if (_this.props.format) {
+        var range = e.target.selectionStart;
+        var lengthFormat = _this.props.format(e.target.value).length;
+        var length = e.target.value.length;
+
+        var newRange = range - (length - lengthFormat);
+        _this.range = newRange;
+      }
+    }, _this.componentDidUpdate = function () {
+      if (_this.range !== undefined) {
+        console.log(_this.range, _this.input);
+        _this.input.setSelectionRange(_this.range, _this.range);
+        _this.range = undefined;
+      }
     }, _this.propagate = function (init) {
 
       var value = _this.state.value;
@@ -99,10 +114,14 @@ var EnhancedInput = function (_React$Component) {
     }, _this.byType = function (props) {
       switch (_this.props.type) {
         case 'textarea':
-          return _react2.default.createElement(Textarea, props);
+          return _react2.default.createElement(Textarea, _extends({ innerRef: function innerRef(ref) {
+              _this.input = ref;
+            } }, props));
         case 'text':
         default:
-          return _react2.default.createElement(Input, props);
+          return _react2.default.createElement(Input, _extends({ innerRef: function innerRef(ref) {
+              _this.input = ref;
+            } }, props));
       }
     }, _this.render = function () {
 
@@ -119,7 +138,7 @@ var EnhancedInput = function (_React$Component) {
         min: _this.props.min,
         step: _this.props.step,
         value: _this.state.value,
-        placeholder: _this.props.placeholder,
+        placeholder: _this.props.placeholder
       };
 
       return _react2.default.createElement(
