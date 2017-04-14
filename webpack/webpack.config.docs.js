@@ -5,22 +5,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   context: resolve(__dirname, '../'),
   entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
     'babel-polyfill',
     './example/index.js',
   ],
   output: {
     filename: 'bundle.js',
-    path: resolve(__dirname),
-    publicPath: '/',
-  },
-  devtool: 'inline-source-map',
-  devServer: {
-    port: 3000,
-    hot: true,
-    publicPath: '/',
-    historyApiFallback: true,
+    path: resolve(__dirname, '../docs'),
+    publicPath: '/react-enhanced-form\/',
   },
   module: {
     loaders: [
@@ -38,8 +29,12 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.UglifyJsPlugin(),
     new HtmlWebpackPlugin({ template: 'webpack/index-template.html' }),
   ],
 }

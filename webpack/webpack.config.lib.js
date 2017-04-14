@@ -5,16 +5,17 @@ module.exports = {
   context: resolve(__dirname, '../'),
   entry: [
     'babel-polyfill',
-    './index.js',
+    './src/index.js',
   ],
   output: {
-    filename: 'bundle.js',
-    path: resolve(__dirname, 'dist'),
+    filename: 'index.js',
+    path: resolve(__dirname, '../'),
     publicPath: '/',
   },
   module: {
     loaders: [
-      { test: /\.js$/,
+      {
+        test: /\.js$/,
         loaders: [
           'babel-loader',
         ],
@@ -28,5 +29,6 @@ module.exports = {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
+    new webpack.optimize.UglifyJsPlugin(),
   ],
 }

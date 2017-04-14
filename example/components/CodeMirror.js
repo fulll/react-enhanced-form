@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import codemirror from 'codemirror/lib/codemirror'
 import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/seti.css'
+import 'codemirror/theme/material.css'
 import 'codemirror/mode/jsx/jsx'
 
 
@@ -79,7 +79,7 @@ CodeMirror.defaultProps = {
   options: {
     mode: 'jsx',
     lineNumbers: true,
-    theme: 'seti',
+    theme: 'material',
   },
 }
 

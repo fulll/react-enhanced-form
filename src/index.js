@@ -1,17 +1,5 @@
 import React from 'react'
 import debounce from 'lodash/debounce'
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
-
-const Input = styled.input`
-  &:required, &:invalid { box-shadow: none }
-  &:disabled { background-color: rgba(0,0,0,0) }
-`
-
-const Textarea = styled.textarea`
-  &:required, &:invalid { box-shadow: none }
-  &:disabled { background-color: rgba(0,0,0,0) }
-`
 
 const style = s => ({
   default: s ? s.default : {},
@@ -129,10 +117,10 @@ export default class EnhancedInput extends React.Component {
   byType = (props) => {
     switch (this.props.type) {
       case 'textarea':
-        return <Textarea {...props} />
+        return <textarea {...props} />
       case 'text':
       default:
-        return <Input {...props} />
+        return <input {...props} />
     }
   }
 
@@ -175,25 +163,25 @@ EnhancedInput.defaultProps = {
 }
 
 EnhancedInput.propTypes = {
-  style: PropTypes.shape({
-    default: PropTypes.shape({}),
-    onFocus: PropTypes.shape({}),
-    onError: PropTypes.shape({}),
+  style: React.PropTypes.shape({
+    default: React.PropTypes.shape({}),
+    onFocus: React.PropTypes.shape({}),
+    onError: React.PropTypes.shape({}),
   }),
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
+  value: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number,
   ]),
-  placeholder: PropTypes.string,
-  type: PropTypes.string,
-  step: PropTypes.number,
-  min: PropTypes.number,
-  format: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  spellCheck: PropTypes.bool,
-  required: PropTypes.bool,
-  disabled: PropTypes.bool,
-  check: PropTypes.func,
-  onMount: PropTypes.func,
-  onChange: PropTypes.func,
+  placeholder: React.PropTypes.string,
+  type: React.PropTypes.string,
+  step: React.PropTypes.number,
+  min: React.PropTypes.number,
+  format: React.PropTypes.func,
+  onKeyDown: React.PropTypes.func,
+  spellCheck: React.PropTypes.bool,
+  required: React.PropTypes.bool,
+  disabled: React.PropTypes.bool,
+  check: React.PropTypes.func,
+  onMount: React.PropTypes.func,
+  onChange: React.PropTypes.func,
 }
