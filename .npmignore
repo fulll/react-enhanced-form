@@ -1,2 +1,9 @@
 .DS_Store
 node_modules
+docs
+example
+src
+wepback
+.babelrc
+.eslintrc
+.eslintignore
