@@ -1,6 +1,6 @@
 {
   "name": "react-enhanced-form",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Enhanced form input for your React application",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
   "keywords": [
     "xeonys",
     "inextenso digital",
+    "textarea",
     "input",
     "form",
     "redux",
