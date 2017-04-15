@@ -9,7 +9,7 @@ module.exports = {
   output: {
     filename: 'index.js',
     path: resolve(__dirname, '../'),
-    publicPath: '/',
+    libraryTarget: 'umd',
   },
   module: {
     loaders: [

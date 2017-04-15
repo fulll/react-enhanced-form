@@ -1,7 +1,7 @@
 import React from 'react'
 import debounce from 'lodash/debounce'
 
-const style = s => ({
+const getStyle = s => ({
   default: s ? s.default : {},
   onFocus: s ? s.onFocus : {},
   onError: s ? s.onError : {},
@@ -13,9 +13,9 @@ const style = s => ({
   },
 })
 
-export default class EnhancedInput extends React.Component {
+class EnhancedInput extends React.Component {
   // eslint-disable-next-line react/sort-comp
-  style = style(this.props.style)
+  style = getStyle(this.props.style)
   state = {
     value: this.props.value,
     style: this.style.default,
@@ -185,3 +185,5 @@ EnhancedInput.propTypes = {
   onMount: React.PropTypes.func,
   onChange: React.PropTypes.func,
 }
+
+export default EnhancedInput
