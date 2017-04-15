@@ -117,10 +117,10 @@ export default class EnhancedInput extends React.Component {
   byType = (props) => {
     switch (this.props.type) {
       case 'textarea':
-        return <textarea {...props} />
+        return <textarea ref={(ref) => { this.input = ref }} {...props} />
       case 'text':
       default:
-        return <input {...props} />
+        return <input ref={(ref) => { this.input = ref }} {...props} />
     }
   }
 
