@@ -11,7 +11,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: resolve(__dirname, '../docs'),
-    publicPath: '/react-enhanced-form\/',
+    publicPath: '/react-enhanced-form/',
   },
   module: {
     loaders: [
