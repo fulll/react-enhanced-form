@@ -14,11 +14,10 @@ const getStyle = s => ({
 })
 
 class EnhancedInput extends React.Component {
-  // eslint-disable-next-line react/sort-comp
-  style = getStyle(this.props.style)
+
   state = {
     value: this.props.value,
-    style: this.style.default,
+    style: getStyle(this.props.style).default,
   }
 
   componentDidMount = () => {
@@ -40,16 +39,17 @@ class EnhancedInput extends React.Component {
   }
 
   onBlur = () => {
+    const style = getStyle(this.props.style)
     this.setState({
       style: this.state.error
         ? {
-          ...this.style.normalizr,
-          ...this.style.default,
-          ...this.style.onError,
+          ...style.normalizr,
+          ...style.default,
+          ...style.onError,
         }
         : {
-          ...this.style.normalizr,
-          ...this.style.default,
+          ...style.normalizr,
+          ...style.default,
         },
     })
   }
@@ -71,12 +71,13 @@ class EnhancedInput extends React.Component {
   }
 
   onFocus = () => {
+    const style = getStyle(this.props.style)
     this.setState({
       style: {
-        ...this.style.normalizr,
-        ...this.style.default,
-        ...this.style.onFocus,
-        ...this.state.error ? this.style.onError : null,
+        ...style.normalizr,
+        ...style.default,
+        ...style.onFocus,
+        ...this.state.error ? style.onError : null,
       },
     })
   }
@@ -88,15 +89,17 @@ class EnhancedInput extends React.Component {
     if (value === '' && this.props.required) error = true
     if (value === '' && !this.props.required) error = false
 
+    const style = getStyle(this.props.style)
+
     const onFocus = {
-      ...this.style.normalizr,
-      ...this.style.default,
-      ...this.style.onFocus,
+      ...style.normalizr,
+      ...style.default,
+      ...style.onFocus,
     }
     const onError = {
-      ...this.style.normalizr,
-      ...this.style.default,
-      ...this.style.onError,
+      ...style.normalizr,
+      ...style.default,
+      ...style.onError,
     }
 
     if (error) this.setState({ style: onError, error }, this.next)
