@@ -53,9 +53,9 @@
     "babel-standalone": "^6.24.0",
     "codemirror": "^5.25.0",
     "lodash": "^4.17.4",
-    "prop-types": "^15.5.8",
-    "react": "15.4.2",
-    "react-dom": "15.4.2",
-    "styled-components": "^1.4.4"
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "styled-components": "^2.2.1"
   }
 }

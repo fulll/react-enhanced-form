@@ -1,5 +1,6 @@
 import React from 'react'
 import debounce from 'lodash/debounce'
+import PropTypes from 'prop-types'
 
 const getStyle = s => ({
   default: s ? s.default : {},
@@ -166,27 +167,27 @@ EnhancedInput.defaultProps = {
 }
 
 EnhancedInput.propTypes = {
-  style: React.PropTypes.shape({
-    default: React.PropTypes.shape({}),
-    onFocus: React.PropTypes.shape({}),
-    onError: React.PropTypes.shape({}),
+  style: PropTypes.shape({
+    default: PropTypes.shape({}),
+    onFocus: PropTypes.shape({}),
+    onError: PropTypes.shape({}),
   }),
-  value: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.number,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
   ]),
-  placeholder: React.PropTypes.string,
-  type: React.PropTypes.string,
-  step: React.PropTypes.number,
-  min: React.PropTypes.number,
-  format: React.PropTypes.func,
-  onKeyDown: React.PropTypes.func,
-  spellCheck: React.PropTypes.bool,
-  required: React.PropTypes.bool,
-  disabled: React.PropTypes.bool,
-  check: React.PropTypes.func,
-  onMount: React.PropTypes.func,
-  onChange: React.PropTypes.func,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  step: PropTypes.number,
+  min: PropTypes.number,
+  format: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  spellCheck: PropTypes.bool,
+  required: PropTypes.bool,
+  disabled: PropTypes.bool,
+  check: PropTypes.func,
+  onMount: PropTypes.func,
+  onChange: PropTypes.func,
 }
 
 export default EnhancedInput
