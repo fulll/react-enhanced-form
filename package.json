@@ -2,7 +2,7 @@
   "name": "react-enhanced-form",
   "version": "1.4.5",
   "description": "Enhanced form input for your React application",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint ./",
     "start": "webpack-dev-server --config webpack/webpack.config.dev.js",

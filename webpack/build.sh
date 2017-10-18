@@ -3,7 +3,6 @@
 lib () {
   echo 'Start building lib 👷'
   webpack --config webpack/webpack.config.lib.js --bail
-  cp index.js lib
   echo '👏'
 }
 

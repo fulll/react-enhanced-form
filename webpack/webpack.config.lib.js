@@ -8,7 +8,7 @@ module.exports = {
   ],
   output: {
     filename: 'index.js',
-    path: resolve(__dirname, '../'),
+    path: resolve(__dirname, '../lib'),
     libraryTarget: 'umd',
   },
   module: {
