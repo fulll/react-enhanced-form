@@ -1,5 +1,5 @@
 {
-  "name": "react-enhanced-form",
+  "name": "@ied/react-enhanced-form",
   "version": "1.4.5",
   "description": "Enhanced form input for your React application",
   "main": "lib/index.js",
