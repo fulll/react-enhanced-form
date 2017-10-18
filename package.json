@@ -1,6 +1,6 @@
 {
   "name": "@ied/react-enhanced-form",
-  "version": "1.4.5",
+  "version": "1.5.0",
   "description": "Enhanced form input for your React application",
   "main": "lib/index.js",
   "scripts": {
